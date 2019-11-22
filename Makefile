@@ -4,8 +4,8 @@ SRC_PATH= src
 BUILD_PATH= build
 
 CXXFLAGS= -Wall
-LIB=
-LDFLAGS=
+LIB= -lglfw -lGLEW
+LDFLAGS= -I/usr/local/include/
 
 EXEC= app
 
