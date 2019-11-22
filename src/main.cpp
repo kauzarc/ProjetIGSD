@@ -2,6 +2,6 @@
 
 int main(int argc, char const *argv[])
 {
-    Renderer r;
+    Renderer r(1024, 768);
     return 0;
 }
