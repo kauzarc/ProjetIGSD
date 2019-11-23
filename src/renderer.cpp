@@ -29,10 +29,10 @@ bool Renderer::initialiseGLFW(int width, int height)
         return false;
     }
 
-    glfwWindowHint(GLFW_SAMPLES, 4);               // 4x antialiasing
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // On veut OpenGL 3.3
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // On ne veut pas l'ancien OpenGL
+    // glfwWindowHint(GLFW_SAMPLES, 4);               // 4x antialiasing
+    // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // On veut OpenGL 3.3
+    // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // On ne veut pas l'ancien OpenGL
 
     m_window = glfwCreateWindow(width, height, "Projet d'info 226", NULL, NULL);
     if (m_window == NULL)

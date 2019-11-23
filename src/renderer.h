@@ -27,6 +27,8 @@ public:
     void Draw(const Shader &shader, const ArrayBuffer &vao, const std::vector<VertexBuffer> &vbo);
 
     const bool &ok() const;
+
+    GLFWwindow *getWindow(){return m_window;}
 };
 
 #endif

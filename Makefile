@@ -4,8 +4,9 @@ SRC_PATH= src
 BUILD_PATH= build
 
 CXXFLAGS= -Wall
-LIB= -lglfw -lGLEW
-LDFLAGS= -I/usr/local/include/
+LIB= -lglfw -lGLEW -lGL -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs
+LDFLAGS= -I/usr/local/include/ -I/public/ig/glm/
+DSO= -I/usr/local
 
 EXEC= app
 
@@ -15,7 +16,7 @@ OBJ= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 all: $(EXEC)
 
 $(EXEC): $(OBJ)
-	$(CC) -o  $@ $^ $(LIB)
+	$(CC) -o  $@ $(DSO) $^ $(LIB)
 
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.cpp
 	$(CC) -c $(LDFLAGS) $^ $(CXXFLAGS) -o $@
