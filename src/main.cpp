@@ -28,9 +28,25 @@ int main(int argc, char const *argv[])
     shader.init();
     glUseProgram(shader.getProgramId());
 
+    float red = 1;
+    float increment = -0.05;
+
+    GLint location = glGetUniformLocation(shader.getProgramId(), "u_red");
+
     glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GL_TRUE);
     do
     {
+        if(red > 1.0){
+            increment = -0.05;
+        }else if (red < 0.0)
+        {
+            increment = 0.05;
+        }
+
+        red += increment;
+
+        glUniform1f(location, red);
+        
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
