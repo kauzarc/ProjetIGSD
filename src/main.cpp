@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "shader.h"
 
 int main(int argc, char const *argv[])
 {
@@ -22,6 +23,10 @@ int main(int argc, char const *argv[])
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+
+    Shader shader;
+    shader.init();
+    glUseProgram(shader.getProgramId());
 
     glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GL_TRUE);
     do
