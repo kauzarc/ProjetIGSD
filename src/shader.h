@@ -20,9 +20,9 @@ public:
 
     unsigned int init();
 
-    unsigned int getProgramId();
+    unsigned int getProgramId() const;
 
-    bool isOk();
+    bool isOk() const;
 };
 
 #endif

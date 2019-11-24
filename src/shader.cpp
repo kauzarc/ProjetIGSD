@@ -113,6 +113,6 @@ unsigned int Shader::linkShader(unsigned int vertexShaderID, unsigned int fragme
     return programID;
 }
 
-unsigned int Shader::getProgramId() { return m_programID; }
+unsigned int Shader::getProgramId() const { return m_programID; }
 
-bool Shader::isOk() { return m_ok; }
+bool Shader::isOk() const { return m_ok; }

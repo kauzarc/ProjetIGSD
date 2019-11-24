@@ -7,13 +7,18 @@
 
 class ArrayBuffer
 {
+private:
     GLuint m_ID;
+    unsigned int m_number;
 
     VertexBuffer m_vertexbuffer;
-private:
+
 public:
-    ArrayBuffer(VertexBuffer vertexBuffer);
+    ArrayBuffer(const VertexBuffer &vertexBuffer);
     ~ArrayBuffer() = default;
+
+    void bind() const;
+    const unsigned int size() const;
 };
 
 #endif

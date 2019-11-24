@@ -1,10 +1,13 @@
 #include "renderer.h"
 #include "shader.h"
 #include "vertexbuffer.h"
+#include "arraybuffer.h"
 
 int main(int argc, char const *argv[])
 {
     Renderer r(1024, 768);
+    Shader shader;
+    shader.init();
 
     GLFWwindow *m_window = r.getWindow();
 
@@ -13,21 +16,9 @@ int main(int argc, char const *argv[])
         0.5, -0.5, 0,
         -0.5, 0.5, 0};
 
-    GLuint vertexArrayID;
-    glGenVertexArrays(1, &vertexArrayID);
-    glBindVertexArray(vertexArrayID);
-
     VertexBuffer vbo(9, position);
-    vbo.bind();
 
-    glBindVertexArray(0);
-
-
-    glBindVertexArray(vertexArrayID);
-
-    Shader shader;
-    shader.init();
-    glUseProgram(shader.getProgramId());
+    ArrayBuffer vao(vbo);
 
     float red = 1;
     float increment = -0.05;
@@ -45,15 +36,11 @@ int main(int argc, char const *argv[])
         }
 
         red += increment;
-
         glUniform1f(location, red);
-        
-        /* Render here */
+
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-
-        //cout << "in" << endl;
+        r.draw(shader, vao);
 
         // Swap buffers
         glfwSwapBuffers(m_window);
