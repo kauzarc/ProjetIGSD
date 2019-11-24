@@ -24,7 +24,7 @@ public:
     Renderer(int width, int height);
     ~Renderer();
 
-    void Draw(const Shader &shader, const ArrayBuffer &vao, const std::vector<VertexBuffer> &vbo);
+    void draw(const Shader &shader, const ArrayBuffer &vao);
 
     const bool &ok() const;
 

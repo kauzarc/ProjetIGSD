@@ -58,4 +58,9 @@ bool Renderer::initialiseGLEW()
     return true;
 }
 
+void Renderer::draw(const Shader &shader, const ArrayBuffer &vao)
+{
+    
+}
+
 const bool &Renderer::ok() const { return m_ok; }

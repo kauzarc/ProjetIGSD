@@ -1,5 +1,6 @@
 #include "renderer.h"
 #include "shader.h"
+#include "vertexbuffer.h"
 
 int main(int argc, char const *argv[])
 {
@@ -10,19 +11,19 @@ int main(int argc, char const *argv[])
     float position[9] = {
         -0.5, -0.5, 0,
         0.5, -0.5, 0,
-        0, 0.5, 0};
+        -0.5, 0.5, 0};
 
     GLuint vertexArrayID;
     glGenVertexArrays(1, &vertexArrayID);
     glBindVertexArray(vertexArrayID);
 
-    GLuint vertexBufferID;
-    glCreateBuffers(1, &vertexBufferID);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), position, GL_STATIC_DRAW);
+    VertexBuffer vbo(9, position);
+    vbo.bind();
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+    glBindVertexArray(0);
+
+
+    glBindVertexArray(vertexArrayID);
 
     Shader shader;
     shader.init();
