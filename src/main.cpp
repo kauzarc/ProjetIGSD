@@ -37,13 +37,16 @@ int main(int argc, char const *argv[])
     vbo.add(18, position);
     layout.push(GL_FLOAT, 3, 18);
 
+    vbo.add(18, color);
+    layout.push(GL_FLOAT, 3, 18);
+
     ArrayBuffer vao;
     vao.addBuffer(vbo, layout);
 
     float red = 1;
     float increment = -0.05;
 
-    GLint location = glGetUniformLocation(shader.getProgramId(), "u_red");
+    //GLint location = glGetUniformLocation(shader.getProgramId(), "u_red");
 
     glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GL_TRUE);
     do
@@ -58,7 +61,7 @@ int main(int argc, char const *argv[])
         }
 
         red += increment;
-        glUniform1f(location, red);
+        //glUniform1f(location, red);
 
         glClear(GL_COLOR_BUFFER_BIT);
 

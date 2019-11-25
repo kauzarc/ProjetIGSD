@@ -1,8 +1,10 @@
 #version 330 core
 
-uniform float u_red;
+smooth in vec3 colort;
 
 out vec4 color;
+
 void main(){
-  color = vec4(u_red,0.5,0.5,0);
+  color = vec4(colort.x, colort.y, colort.z ,0);
+  //color = vec4(0.5, 0.5, 0.5 ,0);
 }

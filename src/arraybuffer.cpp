@@ -14,8 +14,8 @@ void ArrayBuffer::addBuffer(const VertexBuffer &vertexBuffer, const LayoutBuffer
 
     for (unsigned int i = 0; i < elements.size(); i++)
     {
-        glEnableVertexAttribArray(i);
         glVertexAttribPointer(i, elements[i].count, elements[i].type, elements[i].normalized, 0, elements[i].offset);
+        glEnableVertexAttribArray(i);
     }
 }
 

@@ -10,7 +10,21 @@ struct Element
     GLenum type;
     GLuint count;
     GLboolean normalized;
-    void* offset;
+    void *offset;
+
+    static unsigned int getSizeOfType(GLenum type)
+    {
+        switch (type)
+        {
+        case GL_FLOAT:
+            return sizeof(GLfloat);
+        case GL_INT:
+            return sizeof(GLint);
+        case GL_UNSIGNED_INT:
+            return sizeof(GLuint);
+        }
+        return 0;
+    }
 };
 
 class LayoutBuffer
