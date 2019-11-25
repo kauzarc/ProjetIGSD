@@ -6,9 +6,6 @@ VertexBuffer::VertexBuffer(unsigned int size, float *tab)
         m_data.push_back(tab[i]);
 
     glCreateBuffers(1, &m_ID);
-
-    if (size != 0)
-        m_offset.push_back(size);
 }
 
 void VertexBuffer::bind() const
@@ -18,4 +15,11 @@ void VertexBuffer::bind() const
 }
 
 unsigned int VertexBuffer::count() const { return m_data.size(); }
-const std::vector<int> &VertexBuffer::getOffset() const { return m_offset; }
+
+void VertexBuffer::add(unsigned int count, float *tab)
+{
+    for (unsigned int i = 0; i < count; i++)
+        m_data.push_back(tab[i]);
+
+    glCreateBuffers(1, &m_ID);
+}

@@ -13,30 +13,28 @@ int main(int argc, char const *argv[])
     GLFWwindow *m_window = r.getWindow();
 
     float position[18] = {
-        -0.5,
-        -0.5,
-        0,
-        0.5,
-        -0.5,
-        0,
-        -0.5,
-        0.5,
-        0,
+        -0.5, -0.5, 0.0,
+        0.5, -0.5, 0.0,
+        -0.5, 0.5, 0.0,
 
-        0.5,
-        -0.5,
-        0,
-        -0.5,
-        0.5,
-        0,
-        0.5,
-        0.5,
-        0,
+        0.5, -0.5, 0,
+        -0.5, 0.5, 0,
+        0.5, 0.5, 0.0};
 
-    };
+    float color[18] =
+        {
+            1, 0, 0,
+            0, 1, 0,
+            1, 0, 0,
 
-    VertexBuffer vbo(18, position);
+            0, 1, 0,
+            1, 0, 0,
+            0, 1, 0};
+
+    VertexBuffer vbo;
     LayoutBuffer layout;
+    
+    vbo.add(18, position);
     layout.push(GL_FLOAT, 3, 18);
 
     ArrayBuffer vao;
