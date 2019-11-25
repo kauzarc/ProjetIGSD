@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 
 #include "vertexbuffer.h"
+#include "layoutbuffer.h"
 
 class ArrayBuffer
 {
@@ -11,14 +12,14 @@ private:
     GLuint m_ID;
     unsigned int m_number;
 
-    VertexBuffer m_vertexbuffer;
-
 public:
-    ArrayBuffer(const VertexBuffer &vertexBuffer);
+    ArrayBuffer();
     ~ArrayBuffer() = default;
 
+    void addBuffer(const VertexBuffer &vertexBuffer, const LayoutBuffer &layoutbuffer);
+
     void bind() const;
-    const unsigned int size() const;
+    const unsigned int count() const;
 };
 
 #endif

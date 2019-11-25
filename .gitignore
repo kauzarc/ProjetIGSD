@@ -4,3 +4,4 @@ build/arraybuffer.o
 build/renderer.o
 build/shader.o
 build/vertexbuffer.o
+build/layoutbuffer.o

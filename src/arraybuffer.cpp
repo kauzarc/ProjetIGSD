@@ -1,13 +1,22 @@
 #include "arraybuffer.h"
 
-ArrayBuffer::ArrayBuffer(const VertexBuffer &vertexBuffer)
+ArrayBuffer::ArrayBuffer()
 {
-    m_vertexbuffer = vertexBuffer;
-    m_number = m_vertexbuffer.size() / 3;
-
     glGenVertexArrays(1, &m_ID);
+}
+
+void ArrayBuffer::addBuffer(const VertexBuffer &vertexBuffer, const LayoutBuffer &layoutbuffer)
+{
     bind();
-    m_vertexbuffer.bind();
+    vertexBuffer.bind();
+
+    const std::vector<Element> elements = layoutbuffer.getElements();
+
+    for (unsigned int i = 0; i < elements.size(); i++)
+    {
+        glEnableVertexAttribArray(i);
+        glVertexAttribPointer(i, elements[i].count, elements[i].type, elements[i].normalized, 0, elements[i].offset);
+    }
 }
 
 void ArrayBuffer::bind() const
@@ -15,7 +24,7 @@ void ArrayBuffer::bind() const
     glBindVertexArray(m_ID);
 }
 
-const unsigned int ArrayBuffer::size() const
+const unsigned int ArrayBuffer::count() const
 {
     return m_number;
 }

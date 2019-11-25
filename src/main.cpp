@@ -2,6 +2,7 @@
 #include "shader.h"
 #include "vertexbuffer.h"
 #include "arraybuffer.h"
+#include "layoutbuffer.h"
 
 int main(int argc, char const *argv[])
 {
@@ -11,14 +12,35 @@ int main(int argc, char const *argv[])
 
     GLFWwindow *m_window = r.getWindow();
 
-    float position[9] = {
-        -0.5, -0.5, 0,
-        0.5, -0.5, 0,
-        -0.5, 0.5, 0};
+    float position[18] = {
+        -0.5,
+        -0.5,
+        0,
+        0.5,
+        -0.5,
+        0,
+        -0.5,
+        0.5,
+        0,
 
-    VertexBuffer vbo(9, position);
+        0.5,
+        -0.5,
+        0,
+        -0.5,
+        0.5,
+        0,
+        0.5,
+        0.5,
+        0,
 
-    ArrayBuffer vao(vbo);
+    };
+
+    VertexBuffer vbo(18, position);
+    LayoutBuffer layout;
+    layout.push(GL_FLOAT, 3, 18);
+
+    ArrayBuffer vao;
+    vao.addBuffer(vbo, layout);
 
     float red = 1;
     float increment = -0.05;
@@ -28,9 +50,11 @@ int main(int argc, char const *argv[])
     glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GL_TRUE);
     do
     {
-        if(red > 1.0){
+        if (red > 1.0)
+        {
             increment = -0.05;
-        }else if (red < 0.0)
+        }
+        else if (red < 0.0)
         {
             increment = 0.05;
         }
