@@ -9,6 +9,6 @@ const std::vector<Element> &LayoutBuffer::getElements() const { return m_element
 
 void LayoutBuffer::push(GLenum type, GLuint count, unsigned int offset)
 {
-    m_elements.push_back({type, count, GL_FALSE, (void *)m_offsetCounter});
-    m_offsetCounter += offset * Element::getSizeOfType(type);
+    m_elements.push_back({type, count, GL_FALSE, m_offsetCounter});
+    m_offsetCounter += offset;
 }

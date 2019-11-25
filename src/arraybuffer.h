@@ -16,7 +16,7 @@ public:
     ArrayBuffer();
     ~ArrayBuffer() = default;
 
-    void addBuffer(const VertexBuffer &vertexBuffer, const LayoutBuffer &layoutbuffer);
+    void addBuffer(const VertexBuffer &vertexBuffer, const LayoutBuffer &layoutbuffer, unsigned int count);
 
     void bind() const;
     const unsigned int count() const;

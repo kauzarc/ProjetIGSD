@@ -62,7 +62,7 @@ void Renderer::draw(const Shader &shader, const ArrayBuffer &vao)
 {
     vao.bind();
     glUseProgram(shader.getProgramId());
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLES, 0, vao.count());
     //cout << vao.count() << endl;
 }
 

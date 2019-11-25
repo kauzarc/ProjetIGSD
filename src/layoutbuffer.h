@@ -10,7 +10,7 @@ struct Element
     GLenum type;
     GLuint count;
     GLboolean normalized;
-    void *offset;
+    unsigned int offset;
 
     static unsigned int getSizeOfType(GLenum type)
     {

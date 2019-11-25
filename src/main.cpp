@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
     layout.push(GL_FLOAT, 3, 18);
 
     ArrayBuffer vao;
-    vao.addBuffer(vbo, layout);
+    vao.addBuffer(vbo, layout, 6);
 
     float red = 1;
     float increment = -0.05;
