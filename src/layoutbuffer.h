@@ -10,9 +10,9 @@ struct Element
     GLenum type;
     GLuint count;
     GLboolean normalized;
-    unsigned int offset;
+    unsigned long offset;
 
-    static unsigned int getSizeOfType(GLenum type)
+    static unsigned long getSizeOfType(GLenum type)
     {
         switch (type)
         {
@@ -31,13 +31,13 @@ class LayoutBuffer
 {
 private:
     std::vector<Element> m_elements;
-    unsigned int m_offsetCounter;
+    unsigned long m_offsetCounter;
 
 public:
     LayoutBuffer();
     const std::vector<Element> &getElements() const;
 
-    void push(GLenum type, GLuint count, unsigned int offset);
+    void push(GLenum type, GLuint count, unsigned long offset);
 };
 
 #endif
