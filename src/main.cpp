@@ -3,6 +3,7 @@
 #include "vertexbuffer.h"
 #include "arraybuffer.h"
 #include "layoutbuffer.h"
+#include "texture.h"
 
 int main(int argc, char const *argv[])
 {
@@ -42,6 +43,8 @@ int main(int argc, char const *argv[])
 
     ArrayBuffer vao;
     vao.addBuffer(vbo, layout, 6);
+
+    Texture texture("images/Arsenal.png");
 
     float red = 1;
     float increment = -0.05;
