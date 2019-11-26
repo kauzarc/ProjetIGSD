@@ -4,9 +4,12 @@
 #include <string>
 #include <vector>
 
+#include <GL/glew.h>
+
 class Texture
 {
 private:
+    GLuint m_ID;
     std::vector<float> m_image;
 public:
     Texture(const std::string &path);
