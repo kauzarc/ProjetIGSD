@@ -32,14 +32,27 @@ int main(int argc, char const *argv[])
             1, 0, 0,
             0, 1, 0};
 
+    float textureCoord[12] =
+        {
+            -1, -1,
+            1, -1,
+            -1, 1,
+
+            1, -1,
+            -1, 1,
+            1, 1};
+
     VertexBuffer vbo;
     LayoutBuffer layout;
-    
+
     vbo.add(18, position);
     layout.push(GL_FLOAT, 3, 18);
 
     vbo.add(18, color);
     layout.push(GL_FLOAT, 3, 18);
+
+    vbo.add(12, textureCoord);
+    layout.push(GL_FLOAT, 2, 12);
 
     ArrayBuffer vao;
     vao.addBuffer(vbo, layout, 6);
@@ -68,7 +81,9 @@ int main(int argc, char const *argv[])
 
         glClear(GL_COLOR_BUFFER_BIT);
 
+        texture.bind();
         r.draw(shader, vao);
+        texture.unbind();
 
         // Swap buffers
         glfwSwapBuffers(m_window);
