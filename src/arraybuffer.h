@@ -19,6 +19,7 @@ public:
     void addBuffer(const VertexBuffer &vertexBuffer, const LayoutBuffer &layoutbuffer, unsigned int count);
 
     void bind() const;
+    void unbind() const;
     const unsigned int count() const;
 };
 

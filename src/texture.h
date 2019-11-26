@@ -12,12 +12,13 @@ class Texture
 private:
     GLuint m_ID;
     cv::Mat m_image;
+
 public:
     Texture(const std::string &path);
     ~Texture() = default;
 
-    void bind();
-    void unbind();
+    void bind() const;
+    void unbind() const;
 };
 
 #endif

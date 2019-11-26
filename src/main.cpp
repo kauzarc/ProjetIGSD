@@ -34,12 +34,12 @@ int main(int argc, char const *argv[])
 
     float textureCoord[12] =
         {
-            -1, -1,
-            1, -1,
-            -1, 1,
+            0, 0,
+            1, 0,
+            0, 1,
 
-            1, -1,
-            -1, 1,
+            1, 0,
+            0, 1,
             1, 1};
 
     VertexBuffer vbo;
@@ -81,9 +81,7 @@ int main(int argc, char const *argv[])
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        texture.bind();
-        r.draw(shader, vao);
-        texture.unbind();
+        r.draw(shader, vao, texture);
 
         // Swap buffers
         glfwSwapBuffers(m_window);

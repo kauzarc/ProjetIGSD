@@ -58,12 +58,14 @@ bool Renderer::initialiseGLEW()
     return true;
 }
 
-void Renderer::draw(const Shader &shader, const ArrayBuffer &vao)
+void Renderer::draw(const Shader &shader, const ArrayBuffer &vao,const Texture &texture)
 {
+    texture.bind();
     vao.bind();
     glUseProgram(shader.getProgramId());
     glDrawArrays(GL_TRIANGLES, 0, vao.count());
-    //cout << vao.count() << endl;
+    vao.unbind();
+    texture.unbind();
 }
 
 const bool &Renderer::ok() const { return m_ok; }

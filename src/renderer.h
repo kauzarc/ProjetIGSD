@@ -10,6 +10,7 @@
 #include "arraybuffer.h"
 #include "vertexbuffer.h"
 #include "shader.h"
+#include "texture.h"
 
 class Renderer
 {
@@ -24,7 +25,7 @@ public:
     Renderer(int width, int height);
     ~Renderer();
 
-    void draw(const Shader &shader, const ArrayBuffer &vao);
+    void draw(const Shader &shader, const ArrayBuffer &vao, const Texture &texture);
 
     const bool &ok() const;
 

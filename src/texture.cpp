@@ -12,6 +12,8 @@ Texture::Texture(const string &path)
 
     m_image = cv::imread(path, CV_LOAD_IMAGE_UNCHANGED);
 
+    flip(m_image, m_image, 0);
+
     bind();
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -25,11 +27,11 @@ Texture::Texture(const string &path)
     unbind();
 }
 
-void Texture::bind()
+void Texture::bind() const
 {
     glBindTexture(GL_TEXTURE_2D, m_ID);
 }
-void Texture::unbind()
+void Texture::unbind() const
 {
     glBindTexture(GL_TEXTURE_2D, 0);
 }

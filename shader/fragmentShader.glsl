@@ -8,6 +8,14 @@ out vec4 color;
 uniform sampler2D ourTexture;
 
 void main(){
-  color = texture(ourTexture, textCoord);
-  //color = vec4(0.5, 0.5, 0.5 ,0);
+  vec4 textureColor = texture(ourTexture, textCoord);
+  
+  if(length(textureColor) < 1.3)
+  {
+    color = textureColor;
+  }else
+  {
+    color.xyz = colort;
+    color.w = 0;  
+  }
 }

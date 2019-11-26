@@ -15,7 +15,7 @@ void ArrayBuffer::addBuffer(const VertexBuffer &vertexBuffer, const LayoutBuffer
 
     for (unsigned int i = 0; i < elements.size(); i++)
     {
-        glVertexAttribPointer(i, elements[i].count, elements[i].type, elements[i].normalized, 0, (void*)(elements[i].offset * Element::getSizeOfType(elements[i].type)));
+        glVertexAttribPointer(i, elements[i].count, elements[i].type, elements[i].normalized, 0, (void *)(elements[i].offset * Element::getSizeOfType(elements[i].type)));
         glEnableVertexAttribArray(i);
     }
 }
@@ -23,6 +23,11 @@ void ArrayBuffer::addBuffer(const VertexBuffer &vertexBuffer, const LayoutBuffer
 void ArrayBuffer::bind() const
 {
     glBindVertexArray(m_ID);
+}
+
+void ArrayBuffer::unbind() const
+{
+    glBindVertexArray(0);
 }
 
 const unsigned int ArrayBuffer::count() const
