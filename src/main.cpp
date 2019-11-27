@@ -1,9 +1,17 @@
+#include <iostream>
+
 #include "renderer.h"
 #include "shader.h"
 #include "vertexbuffer.h"
 #include "arraybuffer.h"
 #include "layoutbuffer.h"
 #include "texture.h"
+
+#define GLM_FORCE_RADIANS
+#include <GL/gl.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 int main(int argc, char const *argv[])
 {
@@ -59,25 +67,26 @@ int main(int argc, char const *argv[])
 
     Texture texture("images/Arsenal.png");
 
-    float red = 1;
-    float increment = -0.05;
+    GLuint modelMatrixLocation = glGetUniformLocation(shader.getProgramId(), "u_modelMatrix");
+    GLuint viewMatrixLocation = glGetUniformLocation(shader.getProgramId(), "u_viewMatrix");
+    GLuint projectionMatrixLocation = glGetUniformLocation(shader.getProgramId(), "u_projectionMatrix");
 
-    //GLint location = glGetUniformLocation(shader.getProgramId(), "u_red");
+    glm::mat4 projectionMatrix(1.0);
+    glm::mat4 viewMatrix(1.0);
+    glm::mat4 modelMatrix(1.0);
+
+    glUseProgram(shader.getProgramId());
+
+    glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+    glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+    glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
+    glUseProgram(0);
+
 
     glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GL_TRUE);
     do
     {
-        if (red > 1.0)
-        {
-            increment = -0.05;
-        }
-        else if (red < 0.0)
-        {
-            increment = 0.05;
-        }
-
-        red += increment;
-        //glUniform1f(location, red);
 
         glClear(GL_COLOR_BUFFER_BIT);
 

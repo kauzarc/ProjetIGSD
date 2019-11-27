@@ -7,11 +7,14 @@ layout(location = 2) in vec2 vertexTexture;
 smooth out vec3 colort;
 smooth out vec2 textCoord;
 
+uniform mat4 u_modelMatrix;
+uniform mat4 u_viewMatrix;
+uniform mat4 u_projectionMatrix;
+
 void main(){
   colort = vertexColor_modelspace;
 
   textCoord = vertexTexture;
 
-  gl_Position.xyz = vertexPosition_modelspace;
-  gl_Position.w = 1.0;
+  gl_Position = u_projectionMatrix * u_viewMatrix * u_modelMatrix * vec4(vertexPosition_modelspace, 1);
 }
