@@ -1,14 +1,23 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <glm/glm.hpp>
+
 #include "setup.h"
 #include "renderer.h"
+#include "controler.h"
 
 class Window
 {
 private:
     Renderer m_renderer;
     Setup m_setup;
+
+    Uniform<glm::mat4> m_projectionMatrix;
+    Uniform<glm::mat4> m_viewMatrix;
+    Uniform<glm::mat4> m_modelMatrix;
+
+    Controler m_controler;
 
     GLFWwindow *m_window;
     const std::vector<ArrayBuffer> &m_VAO;
