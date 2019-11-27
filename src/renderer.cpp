@@ -62,8 +62,9 @@ void Renderer::draw(const Shader &shader, const ArrayBuffer &vao,const Texture &
 {
     texture.bind();
     vao.bind();
-    glUseProgram(shader.getProgramId());
+    shader.bind();
     glDrawArrays(GL_TRIANGLES, 0, vao.count());
+    shader.unbind();
     vao.unbind();
     texture.unbind();
 }

@@ -71,18 +71,21 @@ int main(int argc, char const *argv[])
     GLuint viewMatrixLocation = glGetUniformLocation(shader.getProgramId(), "u_viewMatrix");
     GLuint projectionMatrixLocation = glGetUniformLocation(shader.getProgramId(), "u_projectionMatrix");
 
-    glm::mat4 projectionMatrix(1.0);
-    glm::mat4 viewMatrix(1.0);
+    glm::mat4 projectionMatrix = glm::ortho(-1.0f * 768 / 1024, 1.0f * 768 / 1024, -1.0f * 1024 / 768, 1.0f * 1024 / 768, -3.0f, 3.0f);
+    glm::mat4 viewMatrix = glm::lookAt(
+        glm::vec3(0, 0, 1), // where is the camara
+        glm::vec3(0, 0, 0), //where it looks
+        glm::vec3(0, 1, 0)  // head is up
+    );
     glm::mat4 modelMatrix(1.0);
 
-    glUseProgram(shader.getProgramId());
+    shader.bind();
 
     glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
     glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
     glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 
-    glUseProgram(0);
-
+    shader.unbind();
 
     glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GL_TRUE);
     do

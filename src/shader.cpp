@@ -113,6 +113,15 @@ unsigned int Shader::linkShader(unsigned int vertexShaderID, unsigned int fragme
     return programID;
 }
 
+void Shader::bind() const
+{
+    glUseProgram(m_programID);
+}
+void Shader::unbind() const
+{
+    glUseProgram(0);
+}
+
 unsigned int Shader::getProgramId() const { return m_programID; }
 
 bool Shader::isOk() const { return m_ok; }

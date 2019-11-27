@@ -12,8 +12,9 @@ private:
     bool m_ok;
 
     std::string readFile(const std::string &path);
-    unsigned int compileShader(GLenum type, const std::string& file);
+    unsigned int compileShader(GLenum type, const std::string &file);
     unsigned int linkShader(unsigned int vertexShaderID, unsigned int fragmentShaderID);
+
 public:
     Shader();
     ~Shader();
@@ -21,6 +22,8 @@ public:
     unsigned int init();
 
     unsigned int getProgramId() const;
+    void bind() const;
+    void unbind() const;
 
     bool isOk() const;
 };

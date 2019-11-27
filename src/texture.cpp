@@ -2,8 +2,6 @@
 
 #include <opencv2/highgui/highgui.hpp>
 
-#include <iostream>
-
 using namespace std;
 
 Texture::Texture(const string &path)
