@@ -9,13 +9,5 @@ uniform sampler2D ourTexture;
 
 void main(){
   vec4 textureColor = texture(ourTexture, textCoord);
-  
-  if(length(textureColor) < 1.3)
-  {
-    color = textureColor;
-  }else
-  {
-    color.xyz = colort;
-    color.w = 0;  
-  }
+  color = textureColor * vec4(colort, 1);
 }
