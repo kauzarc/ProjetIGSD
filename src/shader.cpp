@@ -8,6 +8,7 @@ using namespace std;
 
 Shader::Shader()
 {
+    init();
 }
 
 Shader::~Shader()
