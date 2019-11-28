@@ -17,7 +17,7 @@ private:
     Uniform<glm::mat4> &m_viewMatrix;
     Uniform<glm::mat4> &m_modelMatrix;
 
-    float angleRot = 0.0f;
+    float angleRot;
 
 public:
     Controler(GLFWwindow *&window, Uniform<glm::mat4> &projectionMatrix, Uniform<glm::mat4> &viewMatrix, Uniform<glm::mat4> &modelMatrix);
