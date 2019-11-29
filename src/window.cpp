@@ -17,14 +17,15 @@ Window::Window() : m_renderer(1024, 768),
     m_viewMatrix.id = glGetUniformLocation(m_shader.getProgramId(), "u_viewMatrix");
     m_projectionMatrix.id = glGetUniformLocation(m_shader.getProgramId(), "u_projectionMatrix");
 
-    m_projectionMatrix.value = glm::ortho(-1.0f * 768.0f / 1024.0f, 1.0f * 768.0f / 1024.0f, -1.0f * 1024.0f / 768.0f, 1.0f * 1024.0f / 768.0f, -3.0f, 3.0f);
-    // m_projectionMatrix.value = glm::mat4(1.0);
-    m_viewMatrix.value = lookAt(
-        glm::vec3(0, 0, 1),    // where is the camara
-        glm::vec3(0, 0, -0.1), //where it looks
-        glm::vec3(0, 1.0, 0)   // head is up
-    );
+    //m_projectionMatrix.value = glm::ortho(-1.0f * 768.0f / 1024.0f, 1.0f * 768.0f / 1024.0f, -1.0f * 1024.0f / 768.0f, 1.0f * 1024.0f / 768.0f, -3.0f, 3.0f);
+    // m_viewMatrix.value = lookAt(
+    //     glm::vec3(0, 0, 1),    // where is the camara
+    //     glm::vec3(0, 0, -0.1), //where it looks
+    //     glm::vec3(0, 1.0, 0)   // head is up
+    // );
 
+    m_viewMatrix.value = glm::mat4(1.f);
+    m_projectionMatrix.value = glm::mat4(1.0);
     m_modelMatrix.value = glm::mat4(1.0);
 
     m_shader.bind();
