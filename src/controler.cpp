@@ -1,7 +1,5 @@
 #include "controler.h"
 
-#include <iostream>
-
 #define GLM_FORCE_RADIANS
 #include <GL/gl.h>
 #include <glm/gtc/matrix_transform.hpp>
@@ -31,12 +29,10 @@ void Controler::check(const Shader &shader)
     }
     if (glfwGetKey(m_window, GLFW_KEY_W))
     {
-        std::cout << "W" << m_angleRot_x << std::endl;
         m_angleRot_x = (m_angleRot_x - 0.01);
     }
     if (glfwGetKey(m_window, GLFW_KEY_S))
     {
-        std::cout << "S" << m_angleRot_x << std::endl;
         m_angleRot_x = (m_angleRot_x + 0.01);
     }
 
