@@ -13,7 +13,8 @@ Controler::Controler(
                                                                                                                                   m_viewMatrix(viewMatrix),
                                                                                                                                   m_modelMatrix(modelMatrix)
 {
-    angleRot = 0.f;
+    m_angleRot_z = 0.f;
+    m_angleRot_x = 0.f;
 }
 
 void Controler::check(const Shader &shader)
@@ -22,22 +23,30 @@ void Controler::check(const Shader &shader)
 
     if (glfwGetKey(m_window, GLFW_KEY_A))
     {
-        std::cout << "A" << angleRot << std::endl;
-        angleRot = (angleRot - M_PI * 0.001);
+        m_angleRot_z = (m_angleRot_z - 0.01);
     }
     if (glfwGetKey(m_window, GLFW_KEY_D))
     {
-        std::cout << "D" << angleRot << std::endl;
-        angleRot = (angleRot + M_PI * 0.001);
+        m_angleRot_z = (m_angleRot_z + 0.01);
+    }
+    if (glfwGetKey(m_window, GLFW_KEY_W))
+    {
+        std::cout << "W" << m_angleRot_x << std::endl;
+        m_angleRot_x = (m_angleRot_x - 0.01);
+    }
+    if (glfwGetKey(m_window, GLFW_KEY_S))
+    {
+        std::cout << "S" << m_angleRot_x << std::endl;
+        m_angleRot_x = (m_angleRot_x + 0.01);
     }
 
-    m_viewMatrix.value = lookAt(
-        glm::vec3(sin(angleRot), 0, cos(angleRot)),    // where is the camara
-        glm::vec3(0, 0, 0), //where it looks
-        glm::vec3(0, 0, 1)   // head is up
-    );
+    m_modelMatrix.value = glm::rotate(m_modelMatrix.value, m_angleRot_z, glm::vec3(0.f, 1.f, 0.f));
+    m_modelMatrix.value = glm::rotate(m_modelMatrix.value, m_angleRot_x, glm::vec3(1.f, 0.f, 0.f));
 
-    glUniformMatrix4fv(m_viewMatrix.id, 1, GL_FALSE, glm::value_ptr(m_viewMatrix.value));
+    glUniformMatrix4fv(m_modelMatrix.id, 1, GL_FALSE, glm::value_ptr(m_modelMatrix.value));
 
     shader.unbind();
+
+    m_angleRot_z = 0;
+    m_angleRot_x = 0;
 }
