@@ -25,7 +25,8 @@ bool Renderer::initialiseGLFW(int width, int height)
 {
     if (!glfwInit())
     {
-        std::cout << "Failed to initialize GLFW\n" << stderr << endl;
+        std::cout << "Failed to initialize GLFW\n"
+                  << stderr << endl;
         return false;
     }
 
@@ -37,7 +38,8 @@ bool Renderer::initialiseGLFW(int width, int height)
     m_window = glfwCreateWindow(width, height, "Projet d'info 226", NULL, NULL);
     if (m_window == NULL)
     {
-        std::cout << "Failed to open GLFW window.\n" << stderr << endl;
+        std::cout << "Failed to open GLFW window.\n"
+                  << stderr << endl;
         glfwTerminate();
         return false;
     }
@@ -52,13 +54,14 @@ bool Renderer::initialiseGLEW()
     glewExperimental = true; // Nécessaire pour le profil core
     if (glewInit() != GLEW_OK)
     {
-        std::cout << "Failed to initialize GLEW\n" << stderr << endl;
+        std::cout << "Failed to initialize GLEW\n"
+                  << stderr << endl;
         return false;
     }
     return true;
 }
 
-void Renderer::draw(const Shader &shader, const ArrayBuffer &vao,const Texture &texture)
+void Renderer::draw(const Shader &shader, const ArrayBuffer &vao, const Texture &texture)
 {
     texture.bind();
     vao.bind();

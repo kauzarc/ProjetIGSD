@@ -8,10 +8,13 @@
 #include "arraybuffer.h"
 #include "shader.h"
 #include "texture.h"
+#include "data.h"
 
 class Setup
 {
 private:
+    Data m_data;
+
     std::vector<VertexBuffer> m_VBO;
     std::vector<LayoutBuffer> m_LBO;
     std::vector<ArrayBuffer> m_VAO;
@@ -20,6 +23,7 @@ private:
 
     void setupBuffer();
     void setupTexture();
+
 public:
     Setup();
 

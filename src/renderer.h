@@ -20,7 +20,8 @@ private:
     bool m_ok;
 
     bool initialiseGLFW(int width, int height);
-    bool initialiseGLEW(); 
+    bool initialiseGLEW();
+
 public:
     Renderer(int width, int height);
     ~Renderer();
@@ -29,7 +30,7 @@ public:
 
     const bool &ok() const;
 
-    GLFWwindow *getWindow(){return m_window;}
+    GLFWwindow *getWindow() { return m_window; }
 };
 
 #endif

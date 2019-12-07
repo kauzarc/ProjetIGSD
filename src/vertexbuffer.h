@@ -17,7 +17,7 @@ public:
 
     void bind() const;
     unsigned int count() const;
-    
+
     void add(unsigned int count, float *tab);
 };
 
