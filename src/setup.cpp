@@ -1,6 +1,6 @@
 #include "setup.h"
 
-Setup::Setup()
+Setup::Setup() : m_modelBuilder(m_data)
 {
     setupBuffer();
     setupTexture();
@@ -8,47 +8,15 @@ Setup::Setup()
 
 void Setup::setupBuffer()
 {
-    float position[18] = {
-        -0.5, -0.5, 0.0,
-        0.5, -0.5, 0.0,
-        -0.5, 0.5, 0.0,
-
-        0.5, -0.5, 0,
-        -0.5, 0.5, 0,
-        0.5, 0.5, 0.0};
-
-    float color[18] =
-        {
-            1, 0, 0,
-            0, 1, 0,
-            1, 0, 0,
-
-            0, 1, 0,
-            1, 0, 0,
-            0, 1, 0};
-
-    float textureCoord[12] =
-        {
-            0, 0,
-            1, 0,
-            0, 1,
-
-            1, 0,
-            0, 1,
-            1, 1};
-
     m_VBO.push_back(VertexBuffer());
     m_LBO.push_back(LayoutBuffer());
     m_VAO.push_back(ArrayBuffer());
 
-    m_VBO[0].add(18, position);
-    m_LBO[0].push(GL_FLOAT, 3, 18);
+    const std::map<std::string, Equipe> &listEquipe = m_data.getEquipes();
+    const std::string &nom = m_data.getNoms()[0];
+    const Equipe &equipe = listEquipe.at(nom);
 
-    m_VBO[0].add(18, color);
-    m_LBO[0].push(GL_FLOAT, 3, 18);
-
-    m_VBO[0].add(12, textureCoord);
-    m_LBO[0].push(GL_FLOAT, 2, 12);
+    m_modelBuilder.build(m_VBO[0], m_LBO[0], equipe);
 
     m_VAO[0].addBuffer(m_VBO[0], m_LBO[0], 6);
 }

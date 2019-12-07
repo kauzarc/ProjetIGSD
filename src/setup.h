@@ -9,11 +9,13 @@
 #include "shader.h"
 #include "texture.h"
 #include "data.h"
+#include "modelbuilder.h"
 
 class Setup
 {
 private:
     Data m_data;
+    ModelBuilder m_modelBuilder;
 
     std::vector<VertexBuffer> m_VBO;
     std::vector<LayoutBuffer> m_LBO;
