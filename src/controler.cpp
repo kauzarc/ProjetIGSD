@@ -39,7 +39,9 @@ void Controler::check(const Shader &shader)
     m_modelMatrix.value = glm::rotate(m_modelMatrix.value, m_angleRot_z, glm::vec3(0.f, 1.f, 0.f));
     m_modelMatrix.value = glm::rotate(m_modelMatrix.value, m_angleRot_x, glm::vec3(1.f, 0.f, 0.f));
 
-    glUniformMatrix4fv(m_modelMatrix.id, 1, GL_FALSE, glm::value_ptr(m_modelMatrix.value));
+    glUniformMatrix4fv(m_modelMatrix.id, 1, GL_FALSE, glm::value_ptr(m_projectionMatrix.value));
+    glUniformMatrix4fv(m_viewMatrix.id, 1, GL_FALSE, glm::value_ptr(m_viewMatrix.value));
+    glUniformMatrix4fv(m_projectionMatrix.id, 1, GL_FALSE, glm::value_ptr(m_modelMatrix.value));
 
     shader.unbind();
 

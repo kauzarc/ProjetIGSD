@@ -21,7 +21,7 @@ Window::Window() : m_renderer(1024, 768),
 
     m_projectionMatrix.value = glm::ortho(-1.f * 1024.f / 768.f, 1.f * 1024.f / 768.f, -1.f, 1.f, 1.f, -1.0f);
     m_viewMatrix.value = glm::mat4(1.f);
-    m_modelMatrix.value = glm::mat4(1.0);
+    m_modelMatrix.value = glm::mat4(1.f);
 
     m_shader.bind();
 
