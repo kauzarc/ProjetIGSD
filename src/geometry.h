@@ -31,16 +31,20 @@ struct Triangle3
         }
     }
 
-    operator float *() const
+    Triangle3 &operator=(const Triangle3 &other)
     {
-        float tab[9];
-        for (int i = 0; i < 3; i++)
+        if (this != &other)
         {
-            tab[3 * i + 0] = vertex[i].x;
-            tab[3 * i + 1] = vertex[i].y;
-            tab[3 * i + 2] = vertex[i].z;
+            a = other.a;
+            b = other.b;
+            c = other.c;
         }
-        return tab;
+        return *this;
+    }
+
+    operator float *()
+    {
+        return reinterpret_cast<float *>(vertex);
     }
 };
 
@@ -71,15 +75,20 @@ struct Triangle2
         }
     }
 
-    operator float *() const
+    Triangle2 &operator=(const Triangle2 &other)
     {
-        float tab[6];
-        for (int i = 0; i < 3; i++)
+        if (this != &other)
         {
-            tab[2 * i + 0] = vertex[i].x;
-            tab[2 * i + 1] = vertex[i].y;
+            a = other.a;
+            b = other.b;
+            c = other.c;
         }
-        return tab;
+        return *this;
+    }
+
+    operator float *()
+    {
+        return reinterpret_cast<float *>(vertex);
     }
 };
 
