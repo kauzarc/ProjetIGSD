@@ -5,90 +5,93 @@
 
 struct Triangle3
 {
-    glm::vec3 vertex[3];
-    glm::vec3 &a;
-    glm::vec3 &b;
-    glm::vec3 &c;
+    glm::vec3 a;
+    glm::vec3 b;
+    glm::vec3 c;
 
-    Triangle3() : a(vertex[0]), b(vertex[1]), c(vertex[2])
-    {
-    }
+    Triangle3() = default;
 
-    Triangle3(glm::vec3 v0, glm::vec3 v1, glm::vec3 v2) : a(vertex[0]), b(vertex[1]), c(vertex[2])
+    Triangle3(const glm::vec3 &v1, const glm::vec3 &v2, const glm::vec3 &v3)
     {
-        a = v0;
-        b = v1;
-        c = v2;
-    }
-
-    Triangle3(float *tab) : a(vertex[0]), b(vertex[1]), c(vertex[2])
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            vertex[i].x = tab[3 * i + 0];
-            vertex[i].y = tab[3 * i + 1];
-            vertex[i].z = tab[3 * i + 2];
-        }
-    }
-
-    Triangle3 &operator=(const Triangle3 &other)
-    {
-        if (this != &other)
-        {
-            a = other.a;
-            b = other.b;
-            c = other.c;
-        }
-        return *this;
+        a = v1;
+        b = v2;
+        c = v3;
     }
 
     operator float *()
     {
-        return reinterpret_cast<float *>(vertex);
+        return reinterpret_cast<float *>(&a);
     }
 };
 
 struct Triangle2
 {
-    glm::vec2 vertex[3];
-    glm::vec2 &a;
-    glm::vec2 &b;
-    glm::vec2 &c;
+    glm::vec2 a;
+    glm::vec2 b;
+    glm::vec2 c;
 
-    Triangle2() : a(vertex[0]), b(vertex[1]), c(vertex[2])
-    {
-    }
+    Triangle2() = default;
 
-    Triangle2(glm::vec2 v0, glm::vec2 v1, glm::vec2 v2) : a(vertex[0]), b(vertex[1]), c(vertex[2])
+    Triangle2(const glm::vec2 &v1, const glm::vec2 &v2, const glm::vec2 &v3)
     {
-        a = v0;
-        b = v1;
-        c = v2;
-    }
-
-    Triangle2(float *tab) : a(vertex[0]), b(vertex[1]), c(vertex[2])
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            vertex[i].x = tab[2 * i + 0];
-            vertex[i].y = tab[2 * i + 1];
-        }
-    }
-
-    Triangle2 &operator=(const Triangle2 &other)
-    {
-        if (this != &other)
-        {
-            a = other.a;
-            b = other.b;
-            c = other.c;
-        }
-        return *this;
+        a = v1;
+        b = v2;
+        c = v3;
     }
 
     operator float *()
     {
-        return reinterpret_cast<float *>(vertex);
+        return reinterpret_cast<float *>(&a);
+    }
+};
+
+struct Quad3
+{
+    Triangle3 t1;
+    Triangle3 t2;
+
+    Quad3() = default;
+
+    Quad3(const Triangle3 &a, const Triangle3 &b)
+    {
+        t1 = a;
+        t2 = b;
+    }
+
+    Quad3(const glm::vec3 &v1, const glm::vec3 &v2, const glm::vec3 &v3, const glm::vec3 &v4)
+    {
+        t1 = Triangle3(v1, v2, v3);
+        t2 = Triangle3(v2, v3, v4);
+    }
+
+    operator float *()
+    {
+        return t1;
+    }
+};
+
+struct Quad2
+{
+    Triangle2 t1;
+    Triangle2 t2;
+
+    Quad2() = default;
+
+    Quad2(const Triangle2 &a, const Triangle2 &b)
+    {
+        t1 = a;
+        t2 = b;
+    }
+
+    Quad2(const glm::vec2 &v1, const glm::vec2 &v2, const glm::vec2 &v3, const glm::vec2 &v4)
+    {
+        t1 = Triangle2(v1, v2, v3);
+        t2 = Triangle2(v2, v3, v4);
+    }
+
+    operator float *()
+    {
+        return t1;
     }
 };
 

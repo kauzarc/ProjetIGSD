@@ -19,7 +19,8 @@ Window::Window() : m_renderer(1024, 768),
     m_viewMatrix.id = glGetUniformLocation(m_shader.getProgramId(), "u_viewMatrix");
     m_projectionMatrix.id = glGetUniformLocation(m_shader.getProgramId(), "u_projectionMatrix");
 
-    m_projectionMatrix.value = glm::ortho(-1.f * 1024.f / 768.f, 1.f * 1024.f / 768.f, -1.f, 1.f, 1.f, -1.0f);
+    float size = 1.f;
+    m_projectionMatrix.value = glm::ortho(size * -1.f * 1024.f / 768.f, size * 1.f * 1024.f / 768.f, size * -1.f, size * 1.f, 1.f, -1.0f);
     m_viewMatrix.value = glm::mat4(1.f);
     m_modelMatrix.value = glm::mat4(1.f);
 
