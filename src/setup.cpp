@@ -8,22 +8,33 @@ Setup::Setup() : m_modelBuilder(m_data)
 
 void Setup::setupBuffer()
 {
-    m_VBO.push_back(VertexBuffer());
-    m_LBO.push_back(LayoutBuffer());
-    m_VAO.push_back(ArrayBuffer());
+    const std::vector<std::string> &nameList = m_data.getNoms();
+    const std::map<std::string, Equipe> &equipeList = m_data.getEquipes();
 
-    const std::map<std::string, Equipe> &listEquipe = m_data.getEquipes();
-    const std::string &nom = m_data.getNoms()[0];
-    const Equipe &equipe = listEquipe.at(nom);
+    for (unsigned int i = 0; i < nameList.size(); i++)
+    {
+        m_VBO.push_back(VertexBuffer());
+        m_LBO.push_back(LayoutBuffer());
+        m_VAO.push_back(ArrayBuffer());
 
-    m_modelBuilder.build(m_VBO[0], m_LBO[0], equipe);
+        const Equipe &equipe = equipeList.at(nameList[i]);
 
-    m_VAO[0].addBuffer(m_VBO[0], m_LBO[0], 96000);
+        m_modelBuilder.build(m_VBO[i], m_LBO[i], equipe);
+
+        m_VAO[i].addBuffer(m_VBO[i], m_LBO[i], 96000);
+    }
 }
 
 void Setup::setupTexture()
 {
-    m_Texture.push_back(Texture("images/Arsenal.png"));
+    const std::vector<std::string> &nameList = m_data.getNoms();
+
+    for (unsigned int i = 0; i < nameList.size(); i++)
+    {
+        std::string str = "images/" + nameList[i] + ".png";
+
+        m_Texture.push_back(str);
+    }
 }
 
 const std::vector<ArrayBuffer> &Setup::getVAO() const { return m_VAO; }

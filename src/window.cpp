@@ -42,7 +42,10 @@ void Window::run()
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        m_renderer.draw(m_shader, m_VAO[0], m_Texture[0]);
+        for(unsigned int i = 0; i < m_VAO.size(); i++)
+        {
+            m_renderer.draw(m_shader, m_VAO[i], m_Texture[i]);
+        }
 
         // Swap buffers
         glfwSwapBuffers(m_window);
