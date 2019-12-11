@@ -41,20 +41,24 @@ void ModelBuilder::segmentBuilder(Line3 &positions, Line3 &colors, Line2 &textur
     float height = 2.f / 40.f;
     float gradient = pos2.y - pos1.y;
 
+    float directionHB = (gradient > 0) ? 1.f : -1.f;
+
     float width = pos2.x - pos1.x;
 
     glm::vec3 Yaxes = glm::vec3(0, height / segment, 0);
     glm::vec3 Xaxes = glm::vec3(width / segment, gradient / segment, 0);
+    glm::vec3 Zaxes = glm::vec3(0, 0, 0.02);
 
     for (unsigned int i = 0; i < segment; i++)
     {
         for (unsigned int j = 0; j < segment; j++)
         {
             positions.push_back(Quad3(
-                pos1 + float(i) * Xaxes + float(j + 1) * Yaxes,
-                pos1 + float(i) * Xaxes + float(j) * Yaxes,
-                pos1 + float(i + 1) * Xaxes + float(j + 1) * Yaxes,
-                pos1 + float(i + 1) * Xaxes + float(j) * Yaxes));
+                pos1 + float(i) * Xaxes + float(j + 1) * Yaxes + glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * Zaxes + directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * Zaxes,
+                pos1 + float(i) * Xaxes + float(j) * Yaxes + glm::sin((float)M_PI * (float)(j) / (float)segment) * Zaxes + directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * Zaxes,
+                pos1 + float(i + 1) * Xaxes + float(j + 1) * Yaxes + glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * Zaxes + directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * Zaxes,
+                pos1 + float(i + 1) * Xaxes + float(j) * Yaxes + glm::sin((float)M_PI * (float)(j) / (float)segment) * Zaxes + directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * Zaxes));
+
             colors.push_back(Quad3(col, col, col, col));
 
             textures.push_back(Quad2(
