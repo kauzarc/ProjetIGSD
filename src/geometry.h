@@ -3,6 +3,15 @@
 
 #include <glm/glm.hpp>
 
+const unsigned int sizeV3 = 3;
+const unsigned int sizeV2 = 2;
+
+const unsigned int sizeT3 = 3 * sizeV3;
+const unsigned int sizeT2 = 3 * sizeV2;
+
+const unsigned int sizeQ3 = 2 * sizeT3;
+const unsigned int sizeQ2 = 2 * sizeT2;
+
 struct Triangle3
 {
     glm::vec3 a;
@@ -94,5 +103,8 @@ struct Quad2
         return t1;
     }
 };
+
+typedef std::vector<Quad3> Line3;
+typedef std::vector<Quad2> Line2;
 
 #endif

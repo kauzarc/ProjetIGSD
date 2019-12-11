@@ -18,7 +18,7 @@ void Setup::setupBuffer()
 
     m_modelBuilder.build(m_VBO[0], m_LBO[0], equipe);
 
-    m_VAO[0].addBuffer(m_VBO[0], m_LBO[0], 6);
+    m_VAO[0].addBuffer(m_VBO[0], m_LBO[0], 96000);
 }
 
 void Setup::setupTexture()
