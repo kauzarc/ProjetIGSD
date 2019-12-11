@@ -27,6 +27,19 @@ struct Triangle3
         c = v3;
     }
 
+    Triangle3 operator+(const Triangle3 &other)
+    {
+        return Triangle3(a + other.a, b + other.b, c + other.c);
+    }
+
+    Triangle3 &operator+=(const Triangle3 &other)
+    {
+        a += other.a;
+        b += other.b;
+        c += other.c;
+        return *this;
+    }
+
     operator float *()
     {
         return reinterpret_cast<float *>(&a);
@@ -46,6 +59,19 @@ struct Triangle2
         a = v1;
         b = v2;
         c = v3;
+    }
+
+    Triangle2 operator+(const Triangle2 &other)
+    {
+        return Triangle2(a + other.a, b + other.b, c + other.c);
+    }
+
+    Triangle2 &operator+=(const Triangle2 &other)
+    {
+        a += other.a;
+        b += other.b;
+        c += other.c;
+        return *this;
     }
 
     operator float *()
@@ -73,6 +99,18 @@ struct Quad3
         t2 = Triangle3(v2, v3, v4);
     }
 
+    Quad3 operator+(const Quad3 &other)
+    {
+        return Quad3(t1 + other.t1, t2 + other.t2);
+    }
+
+    Quad3 &operator+=(const Quad3 &other)
+    {
+        t1 += other.t1;
+        t2 += other.t2;
+        return *this;
+    }
+
     operator float *()
     {
         return t1;
@@ -96,6 +134,18 @@ struct Quad2
     {
         t1 = Triangle2(v1, v2, v3);
         t2 = Triangle2(v2, v3, v4);
+    }
+
+    Quad2 operator+(const Quad2 &other)
+    {
+        return Quad2(t1 + other.t1, t2 + other.t2);
+    }
+
+    Quad2 &operator+=(const Quad2 &other)
+    {
+        t1 += other.t1;
+        t2 += other.t2;
+        return *this;
     }
 
     operator float *()

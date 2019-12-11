@@ -53,11 +53,29 @@ void ModelBuilder::segmentBuilder(Line3 &positions, Line3 &colors, Line2 &textur
     {
         for (unsigned int j = 0; j < segment; j++)
         {
-            positions.push_back(Quad3(
-                pos1 + float(i) * Xaxes + float(j + 1) * Yaxes + glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * Zaxes + directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * Zaxes,
-                pos1 + float(i) * Xaxes + float(j) * Yaxes + glm::sin((float)M_PI * (float)(j) / (float)segment) * Zaxes + directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * Zaxes,
-                pos1 + float(i + 1) * Xaxes + float(j + 1) * Yaxes + glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * Zaxes + directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * Zaxes,
-                pos1 + float(i + 1) * Xaxes + float(j) * Yaxes + glm::sin((float)M_PI * (float)(j) / (float)segment) * Zaxes + directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * Zaxes));
+            Quad3 pos = Quad3(pos1, pos1, pos1, pos1);
+            pos += Quad3(
+                float(i) * Xaxes,
+                float(i) * Xaxes,
+                float(i + 1) * Xaxes,
+                float(i + 1) * Xaxes);
+            pos += Quad3(
+                float(j + 1) * Yaxes,
+                float(j) * Yaxes,
+                float(j + 1) * Yaxes,
+                float(j) * Yaxes);
+            pos += Quad3(
+                glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * Zaxes,
+                glm::sin((float)M_PI * (float)(j) / (float)segment) * Zaxes,
+                glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * Zaxes,
+                glm::sin((float)M_PI * (float)(j) / (float)segment) * Zaxes);
+            pos += Quad3(
+                directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * Zaxes,
+                directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * Zaxes,
+                directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * Zaxes,
+                directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * Zaxes);
+
+            positions.push_back(pos);
 
             colors.push_back(Quad3(col, col, col, col));
 
