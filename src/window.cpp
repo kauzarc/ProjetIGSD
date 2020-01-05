@@ -35,6 +35,7 @@ Window::Window() : m_renderer(1024, 768),
 
 void Window::run()
 {
+    glClearColor(1.f, 1.f, 1.f, 1.f);
 
     glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GL_TRUE);
     do
@@ -42,7 +43,7 @@ void Window::run()
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        for(unsigned int i = 0; i < m_VAO.size(); i++)
+        for (unsigned int i = 0; i < m_VAO.size(); i++)
         {
             m_renderer.draw(m_shader, m_VAO[i], m_Texture[i]);
         }

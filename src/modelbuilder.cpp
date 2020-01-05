@@ -20,10 +20,15 @@ void ModelBuilder::build(VertexBuffer &vbo, LayoutBuffer &lbo, const Equipe &equ
 
     for (unsigned int i = 1; i < scores.size(); i++)
     {
-        float t0 = float((19 - classements[i - 1]) * scores[i - 1]) / float(19 * 98);
-        float t1 = float((19 - classements[i]) * scores[i]) / float(19 * 98);
+        float t0 = (float(19 - classements[i - 1]) / 19. + float(scores[i - 1]) / 98.) / 2.1;
+        float t1 = (float(19 - classements[i]) / 19. + float(scores[i]) / 98.) / 2.1;
 
-        segmentBuilder(position, color, texture, glm::vec3(float(i - 1) / 20.f - 1.f, 2.f * t0 - 1.f, 0), glm::vec3(float(i) / 20.f - 1.f, 2.f * t1 - 1.f, 0), col);
+        segmentBuilder(position,
+                       color,
+                       texture,
+                       glm::vec3(float(i - 1) / 20.f - 1.f, 2.f * t0 - 1.f, 0),
+                       glm::vec3(float(i) / 20.f - 1.f, 2.f * t1 - 1.f, 0),
+                       col);
     }
 
     vbo.add(position.size() * sizeQ3, position[0]);
@@ -38,7 +43,7 @@ void ModelBuilder::build(VertexBuffer &vbo, LayoutBuffer &lbo, const Equipe &equ
 
 void ModelBuilder::segmentBuilder(Line3 &positions, Line3 &colors, Line2 &textures, const glm::vec3 &pos1, const glm::vec3 &pos2, const glm::vec3 &col, const unsigned int segment) const
 {
-    float height = 2.f / 40.f;
+    float height = 2.f / 55.f;
     float gradient = pos2.y - pos1.y;
 
     float directionHB = (gradient > 0) ? 1.f : -1.f;
