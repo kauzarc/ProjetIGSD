@@ -18,7 +18,7 @@ Controler::Controler(
     m_angleRot_z = 0.f;
     m_angleRot_x = 0.f;
     m_arrowIsPressed = false;
-    m_idSelected = 0;
+    m_idSelected = 20;
 }
 
 void Controler::check(const Shader &shader)
