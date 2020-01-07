@@ -9,10 +9,26 @@ ModelBuilder::ModelBuilder(const Data &data) : m_data(data)
 
 void ModelBuilder::build(VertexBuffer &vbo, LayoutBuffer &lbo, const Equipe &equipe) const
 {
-    const glm::vec3 col = glm::vec3(float(std::rand() % 100) / 100.f, float(std::rand() % 100) / 100.f, float(std::rand() % 100) / 100.f);
-
     const std::vector<int> &scores = equipe.getScores();
     const std::vector<int> &classements = equipe.getClassements();
+
+    glm::vec3 col;
+    if (classements.back() < 4)
+    {
+        col = glm::vec3(0.118, 0.565, 1.000);
+    }
+    else if (classements.back() < 7)
+    {
+        col = glm::vec3(1.000, 1.000, 0.000);
+    }
+    else if (classements.back() > 17)
+    {
+        col = glm::vec3(0.863, 0.078, 0.235);
+    }
+    else
+    {
+        col = glm::vec3(0.467, 0.533, 0.600);
+    }
 
     Line3 position;
     Line3 color;
@@ -102,7 +118,13 @@ void ModelBuilder::segmentBuilder(
 
             positions.push_back(pos);
 
-            colors.push_back(Quad3(col, col, col, col));
+            const float min = 0.5;
+            const float max = 0.6;
+            colors.push_back(Quad3(
+                glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * max * col + min * col,
+                glm::sin((float)M_PI * (float)(j) / (float)segment) * max * col + min * col,
+                glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * max * col + min * col,
+                glm::sin((float)M_PI * (float)(j) / (float)segment) * max * col + min * col));
 
             textures.push_back(Quad2(
                 float(i + n * segment) * Xtexture + float(j + 1) * Ytexture,
