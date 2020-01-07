@@ -54,6 +54,9 @@ void ModelBuilder::segmentBuilder(Line3 &positions, Line3 &colors, Line2 &textur
     glm::vec3 Xaxes = glm::vec3(width / segment, gradient / segment, 0);
     glm::vec3 Zaxes = glm::vec3(0, 0, 0.02);
 
+    glm::vec2 Xtexture = glm::vec2(0.2, 0.) / (float)segment;
+    glm::vec2 Ytexture = glm::vec2(0., 1.) / (float)segment;
+
     for (unsigned int i = 0; i < segment; i++)
     {
         for (unsigned int j = 0; j < segment; j++)
@@ -85,10 +88,10 @@ void ModelBuilder::segmentBuilder(Line3 &positions, Line3 &colors, Line2 &textur
             colors.push_back(Quad3(col, col, col, col));
 
             textures.push_back(Quad2(
-                pos1 + float(i) * Xaxes + float(j + 1) * Yaxes,
-                pos1 + float(i) * Xaxes + float(j) * Yaxes,
-                pos1 + float(i + 1) * Xaxes + float(j + 1) * Yaxes,
-                pos1 + float(i + 1) * Xaxes + float(j) * Yaxes));
+                float(i) * Xtexture + float(j + 1) * Ytexture,
+                float(i) * Xtexture + float(j) * Ytexture,
+                float(i + 1) * Xtexture + float(j + 1) * Ytexture,
+                float(i + 1) * Xtexture + float(j) * Ytexture));
         }
     }
 }
