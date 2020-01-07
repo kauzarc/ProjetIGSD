@@ -8,7 +8,7 @@
 #include <iostream>
 
 Window::Window() : m_renderer(1024, 768),
-                   m_controler(m_window, m_projectionMatrix, m_viewMatrix, m_modelMatrix),
+                   m_controler(m_window, m_projectionMatrix, m_viewMatrix, m_modelMatrix, m_selected),
                    m_VAO(m_setup.getVAO()),
                    m_Texture(m_setup.getTexture()),
                    m_shader(m_setup.getShader())
@@ -18,6 +18,7 @@ Window::Window() : m_renderer(1024, 768),
     m_modelMatrix.id = glGetUniformLocation(m_shader.getProgramId(), "u_modelMatrix");
     m_viewMatrix.id = glGetUniformLocation(m_shader.getProgramId(), "u_viewMatrix");
     m_projectionMatrix.id = glGetUniformLocation(m_shader.getProgramId(), "u_projectionMatrix");
+    m_selected.id = glGetUniformLocation(m_shader.getProgramId(), "u_selected");
 
     float size = 1.f;
     m_projectionMatrix.value = glm::ortho(size * -1.f * 1024.f / 768.f, size * 1.f * 1024.f / 768.f, size * -1.f, size * 1.f, 1.f, -1.0f);
@@ -29,6 +30,7 @@ Window::Window() : m_renderer(1024, 768),
     glUniformMatrix4fv(m_modelMatrix.id, 1, GL_FALSE, glm::value_ptr(m_projectionMatrix.value));
     glUniformMatrix4fv(m_viewMatrix.id, 1, GL_FALSE, glm::value_ptr(m_viewMatrix.value));
     glUniformMatrix4fv(m_projectionMatrix.id, 1, GL_FALSE, glm::value_ptr(m_modelMatrix.value));
+    glUniform1i(m_selected.id, m_selected.value);
 
     m_shader.unbind();
 }
@@ -44,6 +46,7 @@ void Window::run()
 
         for (unsigned int i = 0; i < m_VAO.size(); i++)
         {
+            m_controler.updateSelected(m_shader, i);
             m_renderer.draw(m_shader, m_VAO[i], m_Texture[i]);
         }
 

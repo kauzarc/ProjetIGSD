@@ -16,6 +16,7 @@ private:
     Uniform<glm::mat4> m_projectionMatrix;
     Uniform<glm::mat4> m_viewMatrix;
     Uniform<glm::mat4> m_modelMatrix;
+    Uniform<bool> m_selected;
 
     Controler m_controler;
 
