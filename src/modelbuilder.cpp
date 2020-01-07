@@ -28,7 +28,8 @@ void ModelBuilder::build(VertexBuffer &vbo, LayoutBuffer &lbo, const Equipe &equ
                        texture,
                        glm::vec3(float(i - 1) / 20.f - 1.f, 2.f * t0 - 1.f, 0),
                        glm::vec3(float(i) / 20.f - 1.f, 2.f * t1 - 1.f, 0),
-                       col);
+                       col,
+                       i);
     }
 
     vbo.add(position.size() * sizeQ3, position[0]);
@@ -41,7 +42,15 @@ void ModelBuilder::build(VertexBuffer &vbo, LayoutBuffer &lbo, const Equipe &equ
     lbo.push(GL_FLOAT, sizeV2, texture.size() * sizeQ2);
 }
 
-void ModelBuilder::segmentBuilder(Line3 &positions, Line3 &colors, Line2 &textures, const glm::vec3 &pos1, const glm::vec3 &pos2, const glm::vec3 &col, const unsigned int segment) const
+void ModelBuilder::segmentBuilder(
+    Line3 &positions,
+    Line3 &colors,
+    Line2 &textures,
+    const glm::vec3 &pos1,
+    const glm::vec3 &pos2,
+    const glm::vec3 &col,
+    const unsigned int n,
+    const unsigned int segment) const
 {
     float height = 2.f / 55.f;
     float gradient = pos2.y - pos1.y;
@@ -54,7 +63,7 @@ void ModelBuilder::segmentBuilder(Line3 &positions, Line3 &colors, Line2 &textur
     glm::vec3 Xaxes = glm::vec3(width / segment, gradient / segment, 0);
     glm::vec3 Zaxes = glm::vec3(0, 0, 0.02);
 
-    glm::vec2 Xtexture = glm::vec2(0.2, 0.) / (float)segment;
+    glm::vec2 Xtexture = glm::vec2(0.1, 0.) / (float)segment;
     glm::vec2 Ytexture = glm::vec2(0., 1.) / (float)segment;
 
     for (unsigned int i = 0; i < segment; i++)
@@ -88,10 +97,10 @@ void ModelBuilder::segmentBuilder(Line3 &positions, Line3 &colors, Line2 &textur
             colors.push_back(Quad3(col, col, col, col));
 
             textures.push_back(Quad2(
-                float(i) * Xtexture + float(j + 1) * Ytexture,
-                float(i) * Xtexture + float(j) * Ytexture,
-                float(i + 1) * Xtexture + float(j + 1) * Ytexture,
-                float(i + 1) * Xtexture + float(j) * Ytexture));
+                float(i + n * segment) * Xtexture + float(j + 1) * Ytexture,
+                float(i + n * segment) * Xtexture + float(j) * Ytexture,
+                float(i + 1 + n * segment) * Xtexture + float(j + 1) * Ytexture,
+                float(i + 1 + n * segment) * Xtexture + float(j) * Ytexture));
         }
     }
 }
