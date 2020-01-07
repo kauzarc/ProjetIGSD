@@ -14,6 +14,9 @@ Renderer::Renderer(int width, int height)
     {
         m_ok = false;
     }
+
+    glClearColor(1.f, 1.f, 1.f, 1.f);
+    glEnable(GL_DEPTH_TEST);
 }
 
 Renderer::~Renderer()

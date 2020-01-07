@@ -17,23 +17,24 @@ Controler::Controler(
 
 void Controler::check(const Shader &shader)
 {
+    const float speed = 0.01;
     shader.bind();
 
     if (glfwGetKey(m_window, GLFW_KEY_A))
     {
-        m_angleRot_z = (m_angleRot_z - 0.01);
+        m_angleRot_z = (m_angleRot_z + speed);
     }
     if (glfwGetKey(m_window, GLFW_KEY_D))
     {
-        m_angleRot_z = (m_angleRot_z + 0.01);
+        m_angleRot_z = (m_angleRot_z - speed);
     }
     if (glfwGetKey(m_window, GLFW_KEY_W))
     {
-        m_angleRot_x = (m_angleRot_x - 0.01);
+        m_angleRot_x = (m_angleRot_x + speed);
     }
     if (glfwGetKey(m_window, GLFW_KEY_S))
     {
-        m_angleRot_x = (m_angleRot_x + 0.01);
+        m_angleRot_x = (m_angleRot_x - speed);
     }
 
     m_modelMatrix.value = glm::rotate(m_modelMatrix.value, m_angleRot_z, glm::vec3(0.f, 1.f, 0.f));

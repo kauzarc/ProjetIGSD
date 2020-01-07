@@ -18,16 +18,24 @@ void ModelBuilder::build(VertexBuffer &vbo, LayoutBuffer &lbo, const Equipe &equ
     Line3 color;
     Line2 texture;
 
+    float posTab[scores.size()];
+    posTab[0] = (float(19 - classements[0]) / 19. + float(scores[0]) / 98.) / 2.1;
+
     for (unsigned int i = 1; i < scores.size(); i++)
     {
-        float t0 = (float(19 - classements[i - 1]) / 19. + float(scores[i - 1]) / 98.) / 2.1;
-        float t1 = (float(19 - classements[i]) / 19. + float(scores[i]) / 98.) / 2.1;
+        posTab[i] = (float(19 - classements[i]) / 19. + float(scores[i]) / 98.) / 2.1;
+
+        float gradiant = 0.;
+        if (posTab[i] - posTab[i - 1] < 0)
+        {
+            gradiant = -gradiant;
+        }
 
         segmentBuilder(position,
                        color,
                        texture,
-                       glm::vec3(float(i - 1) / 20.f - 1.f, 2.f * t0 - 1.f, 0),
-                       glm::vec3(float(i) / 20.f - 1.f, 2.f * t1 - 1.f, 0),
+                       glm::vec3(float(i - 1) / 20.f - 1.f, 2.f * posTab[i - 1] - 1.f, -gradiant),
+                       glm::vec3(float(i) / 20.f - 1.f, 2.f * posTab[i] - 1.f, -gradiant),
                        col,
                        i);
     }
@@ -55,7 +63,7 @@ void ModelBuilder::segmentBuilder(
     float height = 2.f / 55.f;
     float gradient = pos2.y - pos1.y;
 
-    float directionHB = (gradient > 0) ? 1.f : -1.f;
+    float directionHB = (gradient > 0) ? 0.4f : -0.4f;
 
     float width = pos2.x - pos1.x;
 
@@ -82,15 +90,15 @@ void ModelBuilder::segmentBuilder(
                 float(j + 1) * Yaxes,
                 float(j) * Yaxes);
             pos += Quad3(
-                glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * Zaxes,
-                glm::sin((float)M_PI * (float)(j) / (float)segment) * Zaxes,
-                glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * Zaxes,
-                glm::sin((float)M_PI * (float)(j) / (float)segment) * Zaxes);
+                glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * -Zaxes,
+                glm::sin((float)M_PI * (float)(j) / (float)segment) * -Zaxes,
+                glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * -Zaxes,
+                glm::sin((float)M_PI * (float)(j) / (float)segment) * -Zaxes);
             pos += Quad3(
-                directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * Zaxes,
-                directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * Zaxes,
-                directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * Zaxes,
-                directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * Zaxes);
+                directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * -Zaxes,
+                directionHB * glm::sin((float)M_PI * (float)(i) / (float)segment) * -Zaxes,
+                directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * -Zaxes,
+                directionHB * glm::sin((float)M_PI * (float)(i + 1) / (float)segment) * -Zaxes);
 
             positions.push_back(pos);
 

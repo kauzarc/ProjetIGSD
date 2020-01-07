@@ -35,13 +35,12 @@ Window::Window() : m_renderer(1024, 768),
 
 void Window::run()
 {
-    glClearColor(1.f, 1.f, 1.f, 1.f);
 
     glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GL_TRUE);
     do
     {
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         for (unsigned int i = 0; i < m_VAO.size(); i++)
         {
