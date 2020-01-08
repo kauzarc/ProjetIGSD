@@ -21,7 +21,7 @@ void Setup::setupBuffer()
 
         m_modelBuilder.build(m_VBO[i], m_LBO[i], equipe);
 
-        m_VAO[i].addBuffer(m_VBO[i], m_LBO[i], 96000);
+        m_VAO[i].addBuffer(m_VBO[i], m_LBO[i], 2 * 96000);
     }
 }
 

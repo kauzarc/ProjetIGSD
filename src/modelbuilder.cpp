@@ -37,6 +37,22 @@ void ModelBuilder::build(VertexBuffer &vbo, LayoutBuffer &lbo, const Equipe &equ
     float posTab[scores.size()];
     posTab[0] = (float(19 - classements[0]) / 19. + float(scores[0]) / 98.) / 2.1;
 
+    segmentBuilder(position,
+                   color,
+                   texture,
+                   glm::vec3(float(-1) / 20.f - 1.f, 2.f * posTab[0] - 1.f, 0),
+                   glm::vec3((float(-1) + 0.5f) / 20.f - 1.f, 2.f * posTab[0] - 1.f, 0),
+                   col,
+                   0);
+
+    segmentBuilder(position,
+                   color,
+                   texture,
+                   glm::vec3((float(-1) + 0.5) / 20.f - 1.f, 2.f * posTab[0] - 1.f, 0),
+                   glm::vec3((float(-1) + 1.f) / 20.f - 1.f, 2.f * posTab[0] - 1.f, 0),
+                   col,
+                   0.5);
+
     for (unsigned int i = 1; i < scores.size(); i++)
     {
         posTab[i] = (float(19 - classements[i]) / 19. + float(scores[i]) / 98.) / 2.1;
@@ -51,9 +67,17 @@ void ModelBuilder::build(VertexBuffer &vbo, LayoutBuffer &lbo, const Equipe &equ
                        color,
                        texture,
                        glm::vec3(float(i - 1) / 20.f - 1.f, 2.f * posTab[i - 1] - 1.f, -gradiant),
-                       glm::vec3(float(i) / 20.f - 1.f, 2.f * posTab[i] - 1.f, -gradiant),
+                       glm::vec3((float(i - 1) + 0.5f) / 20.f - 1.f, 2.f * posTab[i] - 1.f, -gradiant),
                        col,
                        i);
+
+        segmentBuilder(position,
+                       color,
+                       texture,
+                       glm::vec3((float(i - 1) + 0.5f) / 20.f - 1.f, 2.f * posTab[i] - 1.f, -gradiant),
+                       glm::vec3(float(i) / 20.f - 1.f, 2.f * posTab[i] - 1.f, -gradiant),
+                       col,
+                       (float)(i) + 0.5f);
     }
 
     vbo.add(position.size() * sizeQ3, position[0]);
@@ -73,10 +97,10 @@ void ModelBuilder::segmentBuilder(
     const glm::vec3 &pos1,
     const glm::vec3 &pos2,
     const glm::vec3 &col,
-    const unsigned int n,
+    const float n,
     const unsigned int segment) const
 {
-    float height = 2.f / 55.f;
+    float height = 2.f / 45.f;
     float gradient = pos2.y - pos1.y;
 
     float directionHB = (gradient > 0) ? 0.4f : -0.4f;
@@ -87,7 +111,7 @@ void ModelBuilder::segmentBuilder(
     glm::vec3 Xaxes = glm::vec3(width / segment, gradient / segment, 0);
     glm::vec3 Zaxes = glm::vec3(0, 0, 0.02);
 
-    glm::vec2 Xtexture = glm::vec2(0.1, 0.) / (float)segment;
+    glm::vec2 Xtexture = glm::vec2(0.15, 0.) / (float)segment;
     glm::vec2 Ytexture = glm::vec2(0., 1.) / (float)segment;
 
     for (unsigned int i = 0; i < segment; i++)
@@ -126,11 +150,19 @@ void ModelBuilder::segmentBuilder(
                 glm::sin((float)M_PI * (float)(j + 1) / (float)segment) * max * col + min * col,
                 glm::sin((float)M_PI * (float)(j) / (float)segment) * max * col + min * col));
 
-            textures.push_back(Quad2(
-                float(i + n * segment) * Xtexture + float(j + 1) * Ytexture,
-                float(i + n * segment) * Xtexture + float(j) * Ytexture,
-                float(i + 1 + n * segment) * Xtexture + float(j + 1) * Ytexture,
-                float(i + 1 + n * segment) * Xtexture + float(j) * Ytexture));
+            Quad2 tex = Quad2(
+                ((float(i) / 2.f) + n * segment) * Xtexture,
+                ((float(i) / 2.f) + n * segment) * Xtexture,
+                ((float(i + 1) / 2.f) + n * segment) * Xtexture,
+                ((float(i + 1) / 2.f) + n * segment) * Xtexture);
+
+            tex += Quad2(
+                float(j + 1) * Ytexture,
+                float(j) * Ytexture,
+                float(j + 1) * Ytexture,
+                float(j) * Ytexture);
+
+            textures.push_back(tex);
         }
     }
 }

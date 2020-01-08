@@ -16,7 +16,7 @@ private:
                         const glm::vec3 &pos1,
                         const glm::vec3 &pos2,
                         const glm::vec3 &col,
-                        const unsigned int n,
+                        const float n,
                         const unsigned int segment = 20) const;
 
 public:
